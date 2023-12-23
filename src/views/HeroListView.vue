@@ -1,36 +1,37 @@
+<script setup lang="ts">
+import { ref, type Ref } from 'vue';
+
+const heroes = [
+  { number: 11, name: 'Mr. Nice' },
+  { number: 12, name: 'Narco' },
+  { number: 13, name: 'Bombasto' },
+  { number: 14, name: 'Celeritas' },
+  { number: 15, name: 'Magneta' },
+  { number: 16, name: 'RubberMan' },
+  { number: 17, name: 'Dynama' },
+  { number: 18, name: 'Dr IQ' },
+  { number: 19, name: 'Magma' },
+  { number: 20, name: 'Tornado' }
+];
+
+const selectedHero: Ref<null | { number: number; name: string }> = ref(null);
+
+const onClickHero = (hero: { number: number; name: string }) => {
+  selectedHero.value = hero;
+};
+</script>
+
 <template>
   <div class="title">My Heroes</div>
 
   <div class="hero-list">
-    <div class="hero">
-      <span class="hero-number">11</span>
-      <span class="hero-name">Mr. Nice</span>
-    </div>
-    <div class="hero"><span class="hero-number">12</span> <span class="hero-name">Narco</span></div>
-    <div class="hero">
-      <span class="hero-number">13</span>
-      <span class="hero-name">Bombasto</span>
-    </div>
-    <div class="hero">
-      <span class="hero-number">14</span>
-      <span class="hero-name">Celeritas</span>
-    </div>
-    <div class="hero">
-      <span class="hero-number">15</span> <span class="hero-name">Magneta</span>
-    </div>
-    <div class="hero">
-      <span class="hero-number">16</span>
-      <span class="hero-name">RubberMan</span>
-    </div>
-    <div class="hero">
-      <span class="hero-number">17</span> <span class="hero-name">Dynama</span>
-    </div>
-    <div class="hero"><span class="hero-number">18</span> <span class="hero-name">Dr IQ</span></div>
-    <div class="hero"><span class="hero-number">19</span> <span class="hero-name">Magma</span></div>
-    <div class="hero">
-      <span class="hero-number">20</span> <span class="hero-name">Tornado</span>
+    <div v-for="(hero, index) in heroes" :key="index" @click="onClickHero(hero)" class="hero">
+      <span class="hero-number">{{ hero.number }}</span>
+      <span class="hero-name">{{ hero.name }}</span>
     </div>
   </div>
+
+  <div>{{ selectedHero }}</div>
 </template>
 
 <style scoped>
