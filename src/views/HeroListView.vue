@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
 
-const heroes = [
+interface Hero {
+  number: number;
+  name: string;
+}
+
+const heroes: Array<Hero> = [
   { number: 11, name: 'Mr. Nice' },
   { number: 12, name: 'Narco' },
   { number: 13, name: 'Bombasto' },
@@ -14,9 +19,9 @@ const heroes = [
   { number: 20, name: 'Tornado' }
 ];
 
-const selectedHero: Ref<null | { number: number; name: string }> = ref(null);
+const selectedHero: Ref<null | Hero> = ref(null);
 
-const onClickHero = (hero: { number: number; name: string }) => {
+const onClickHero = (hero: Hero) => {
   selectedHero.value = hero;
 };
 </script>
