@@ -24,6 +24,8 @@ const selectedHero: Ref<null | Hero> = ref(null);
 const onClickHero = (hero: Hero) => {
   selectedHero.value = hero;
 };
+
+const uppercase = (text: string) => text.toUpperCase();
 </script>
 
 <template>
@@ -45,7 +47,7 @@ const onClickHero = (hero: Hero) => {
   </div>
 
   <template v-if="selectedHero">
-    <div class="title">{{ selectedHero.name }} is my hero</div>
+    <div class="title">{{ uppercase(selectedHero.name) }} is my hero</div>
     <button>Details</button>
   </template>
 </template>
