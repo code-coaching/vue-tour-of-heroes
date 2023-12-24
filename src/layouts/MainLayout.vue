@@ -19,12 +19,6 @@ const router = useRouter();
 </template>
 
 <style scoped>
-.title {
-  font-size: 1.5rem;
-  color: grey;
-  font-weight: bold;
-}
-
 .layout-container {
   margin: 2rem;
 }

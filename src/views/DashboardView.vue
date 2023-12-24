@@ -11,10 +11,6 @@
 
 <style scoped>
 .title {
-  font-size: 1.5rem;
-  color: grey;
-  font-weight: bold;
-
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;

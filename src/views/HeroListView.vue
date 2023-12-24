@@ -58,10 +58,6 @@ const uppercase = (text: string) => text.toUpperCase();
 
 <style scoped>
 .title {
-  font-size: 1.5rem;
-  color: grey;
-  font-weight: bold;
-
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
