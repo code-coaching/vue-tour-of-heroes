@@ -1,5 +1,5 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ type: 'default' | 'primary' | 'negative' }>(), {
+withDefaults(defineProps<{ type?: 'default' | 'primary' | 'negative' }>(), {
   type: 'default'
 });
 </script>
