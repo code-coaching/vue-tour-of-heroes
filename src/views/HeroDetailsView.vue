@@ -2,9 +2,10 @@
 import StyledButton from '@/components/StyledButton.vue';
 import type { Hero } from '@/components/models';
 import { onMounted, ref, type Ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
+const router = useRouter();
 
 const hero: Ref<Hero | null> = ref(null);
 const heroes = [
@@ -33,7 +34,7 @@ onMounted(() => {
     <div>id: {{ hero.number }}</div>
     <div>name: <input :value="hero.name" /></div>
 
-    <StyledButton>Back</StyledButton>
+    <StyledButton class="back-button" @click="router.go(-1)">Back</StyledButton>
   </template>
   <template v-else>
     <div class="title">Hero not found!</div>
@@ -44,5 +45,9 @@ onMounted(() => {
 .title {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.back-button {
+  margin-top: 1rem;
 }
 </style>
