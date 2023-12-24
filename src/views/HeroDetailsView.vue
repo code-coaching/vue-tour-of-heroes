@@ -35,6 +35,9 @@ onMounted(() => {
 
     <StyledButton>Back</StyledButton>
   </template>
+  <template v-else>
+    <div class="title">Hero not found!</div>
+  </template>
 </template>
 
 <style scoped>
