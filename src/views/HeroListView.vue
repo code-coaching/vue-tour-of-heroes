@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue';
 import StyledButton from '@/components/StyledButton.vue';
+import { ref, type Ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 interface Hero {
   number: number;
@@ -49,7 +52,11 @@ const uppercase = (text: string) => text.toUpperCase();
 
   <template v-if="selectedHero">
     <div class="title">{{ uppercase(selectedHero.name) }} is my hero</div>
-    <StyledButton>Details</StyledButton>
+    <StyledButton
+      @click="router.push({ name: 'hero-details', params: { id: selectedHero?.number } })"
+    >
+      Details
+    </StyledButton>
   </template>
 </template>
 
