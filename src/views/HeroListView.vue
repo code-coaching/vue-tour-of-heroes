@@ -30,13 +30,24 @@ const onClickHero = (hero: Hero) => {
   <div class="title">My Heroes</div>
 
   <div class="hero-list">
-    <div v-for="(hero, index) in heroes" :key="index" @click="onClickHero(hero)" class="hero">
+    <div
+      v-for="(hero, index) in heroes"
+      :key="index"
+      @click="onClickHero(hero)"
+      class="hero"
+      :class="{
+        'hero--active': hero.number === selectedHero?.number
+      }"
+    >
       <span class="hero-number">{{ hero.number }}</span>
       <span class="hero-name">{{ hero.name }}</span>
     </div>
   </div>
 
-  <div>{{ selectedHero }}</div>
+  <template v-if="selectedHero">
+    <div class="title">{{ selectedHero.name }} is my hero</div>
+    <button>Details</button>
+  </template>
 </template>
 
 <style scoped>
@@ -85,5 +96,11 @@ const onClickHero = (hero: Hero) => {
   padding: 0.5rem;
   padding-left: 0.75rem;
   font-weight: 600;
+}
+
+.hero--active {
+  background-color: #cfd8dc;
+  color: white;
+  margin-left: 0.25rem;
 }
 </style>
