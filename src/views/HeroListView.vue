@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
+import StyledButton from '@/components/StyledButton.vue';
 
 interface Hero {
   number: number;
@@ -48,7 +49,7 @@ const uppercase = (text: string) => text.toUpperCase();
 
   <template v-if="selectedHero">
     <div class="title">{{ uppercase(selectedHero.name) }} is my hero</div>
-    <button>Details</button>
+    <StyledButton>Details</StyledButton>
   </template>
 </template>
 
