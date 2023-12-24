@@ -8,7 +8,7 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
-const { findHero, updateHero } = useHeroes();
+const { findHero, updateHero, deleteHero } = useHeroes();
 const hero: Ref<Hero | null> = ref(null);
 
 onMounted(() => {
@@ -33,6 +33,14 @@ onMounted(() => {
         "
       >
         Save
+      </StyledButton>
+      <StyledButton
+        @click="
+          deleteHero(hero);
+          router.go(-1);
+        "
+      >
+        Delete
       </StyledButton>
     </div>
   </template>

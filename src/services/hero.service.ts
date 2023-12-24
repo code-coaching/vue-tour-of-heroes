@@ -31,14 +31,22 @@ const useHeroes = () => {
     if (index !== -1) {
       heroes.value[index] = structuredClone(toRaw(hero));
     }
-  }
+  };
+
+  const deleteHero = (hero: Hero) => {
+    heroes.value = heroes.value.filter((h) => h.number !== hero.number);
+    if (selectedHero.value?.number === hero.number) {
+      selectedHero.value = null;
+    }
+  };
 
   return {
     heroes,
     selectedHero,
     topHeroes,
     findHero,
-    updateHero
+    updateHero,
+    deleteHero
   };
 };
 

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import StyledButton from '@/components/StyledButton.vue';
 import type { Hero } from '@/components/models';
-import { useRouter } from 'vue-router';
 import { useHeroes } from '@/services/hero.service';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-const { heroes, selectedHero } = useHeroes();
+const { heroes, selectedHero, deleteHero } = useHeroes();
 
 const onClickHero = (hero: Hero) => {
   selectedHero.value = hero;
@@ -35,11 +35,14 @@ const uppercase = (text: string) => text.toUpperCase();
 
   <template v-if="selectedHero">
     <div class="title">{{ uppercase(selectedHero.name) }} is my hero</div>
-    <StyledButton
-      @click="router.push({ name: 'hero-details', params: { id: selectedHero?.number } })"
-    >
-      Details
-    </StyledButton>
+    <div class="buttons">
+      <StyledButton
+        @click="router.push({ name: 'hero-details', params: { id: selectedHero?.number } })"
+      >
+        Details
+      </StyledButton>
+      <StyledButton @click="deleteHero(selectedHero)">Delete</StyledButton>
+    </div>
   </template>
 </template>
 
@@ -91,5 +94,10 @@ const uppercase = (text: string) => text.toUpperCase();
   background-color: #cfd8dc;
   color: white;
   margin-left: 0.25rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
 }
 </style>
