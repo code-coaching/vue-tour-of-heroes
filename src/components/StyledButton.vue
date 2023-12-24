@@ -1,5 +1,16 @@
+<script setup lang="ts">
+withDefaults(defineProps<{ type: 'default' | 'primary' | 'negative' }>(), {
+  type: 'default'
+});
+</script>
+
 <template>
-  <button>
+  <button
+    :class="{
+      primary: type === 'primary',
+      negative: type === 'negative'
+    }"
+  >
     <slot />
   </button>
 </template>
@@ -18,5 +29,25 @@ button:hover {
   background-color: #e6e6e6;
   color: #0096e8;
   cursor: pointer;
+}
+
+.primary {
+  background-color: #1976d2;
+  color: #ffffff;
+}
+
+.primary:hover {
+  background-color: #1565c0;
+  color: #ffffff;
+}
+
+.negative {
+  background-color: #c10015;
+  color: #ffffff;
+}
+
+.negative:hover {
+  background-color: #9b0012;
+  color: #ffffff;
 }
 </style>

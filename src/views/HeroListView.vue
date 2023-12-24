@@ -41,7 +41,7 @@ const uppercase = (text: string) => text.toUpperCase();
       >
         Details
       </StyledButton>
-      <StyledButton @click="deleteHero(selectedHero)">Delete</StyledButton>
+      <StyledButton :type="'negative'" @click="deleteHero(selectedHero)">Delete</StyledButton>
     </div>
   </template>
 </template>

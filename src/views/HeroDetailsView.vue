@@ -27,6 +27,7 @@ onMounted(() => {
     <div class="buttons">
       <StyledButton @click="router.go(-1)">Back</StyledButton>
       <StyledButton
+        :type="'primary'"
         @click="
           updateHero(hero);
           router.go(-1);
@@ -35,6 +36,7 @@ onMounted(() => {
         Save
       </StyledButton>
       <StyledButton
+        :type="'negative'"
         @click="
           deleteHero(hero);
           router.go(-1);
