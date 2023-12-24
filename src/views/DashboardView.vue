@@ -1,11 +1,15 @@
+<script setup lang="ts">
+import { useHeroes } from '@/services/hero.service';
+const { topHeroes } = useHeroes();
+</script>
+
 <template>
   <div class="title">Top Heroes</div>
 
   <div class="top-heroes">
-    <div class="top-hero">Narco</div>
-    <div class="top-hero">Bombasto</div>
-    <div class="top-hero">Celeritas</div>
-    <div class="top-hero">Magneta</div>
+    <div v-for="(hero, index) in topHeroes" :key="index" class="top-hero">
+      {{ hero.name }}
+    </div>
   </div>
 </template>
 
