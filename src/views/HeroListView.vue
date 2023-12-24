@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import StyledButton from '@/components/StyledButton.vue';
+import type { Hero } from '@/components/models';
 import { ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-
-interface Hero {
-  number: number;
-  name: string;
-}
 
 const heroes: Array<Hero> = [
   { number: 11, name: 'Mr. Nice' },

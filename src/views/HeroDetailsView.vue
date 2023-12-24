@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import StyledButton from '@/components/StyledButton.vue';
+import type { Hero } from '@/components/models';
 import { ref, type Ref } from 'vue';
-
-interface Hero {
-  number: number;
-  name: string;
-}
 
 const hero: Ref<Hero | null> = ref({ number: 15, name: 'Magneta' });
 </script>
