@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import StyledButton from '@/components/StyledButton.vue';
 import type { Hero } from '@/components/models';
-import { ref, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useHeroes } from '@/services/hero.service';
 
 const router = useRouter();
 
-const { heroes } = useHeroes();
-
-const selectedHero: Ref<null | Hero> = ref(null);
+const { heroes, selectedHero } = useHeroes();
 
 const onClickHero = (hero: Hero) => {
   selectedHero.value = hero;
