@@ -19,6 +19,11 @@ const router = createRouter({
           component: () => import('@/views/HeroListView.vue')
         },
         {
+          path: 'heroes/add',
+          name: 'hero-add',
+          component: () => import('@/views/HeroAddView.vue')
+        },
+        {
           path: 'heroes/:id',
           name: 'hero-details',
           component: () => import('@/views/HeroDetailsView.vue')

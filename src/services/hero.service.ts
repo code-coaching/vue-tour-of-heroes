@@ -40,13 +40,20 @@ const useHeroes = () => {
     }
   };
 
+  const addHero = (name: string) => {
+    const maxNumber = Math.max(...heroes.value.map((h) => h.number));
+    const newHero = { number: maxNumber + 1, name } satisfies Hero;
+    heroes.value.push(newHero);
+  };
+
   return {
     heroes,
     selectedHero,
     topHeroes,
     findHero,
     updateHero,
-    deleteHero
+    deleteHero,
+    addHero
   };
 };
 
