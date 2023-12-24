@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import StyledButton from '@/components/StyledButton.vue';
 import { RouterView, useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -9,8 +10,8 @@ const router = useRouter();
     <div class="title">Tour of Heroes</div>
 
     <div class="button-container">
-      <button @click="router.push({ name: 'dashboard' })">Dashboard</button>
-      <button @click="router.push({ name: 'hero-list' })">Heroes</button>
+      <StyledButton @click="router.push({ name: 'dashboard' })">Dashboard</StyledButton>
+      <StyledButton @click="router.push({ name: 'hero-list' })">Heroes</StyledButton>
     </div>
 
     <RouterView />
@@ -31,20 +32,5 @@ const router = useRouter();
 .button-container {
   display: flex;
   gap: 0.25rem;
-}
-
-button {
-  background-color: #eeeeee;
-  border-radius: 0.25rem;
-  font-weight: 500;
-  border: none;
-  padding: 0.25rem 0.5rem;
-  color: #567868;
-}
-
-button:hover {
-  background-color: #e6e6e6;
-  color: #0096e8;
-  cursor: pointer;
 }
 </style>
