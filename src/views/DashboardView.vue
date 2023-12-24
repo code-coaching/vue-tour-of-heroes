@@ -1,13 +1,26 @@
 <script setup lang="ts">
 import { useHeroes } from '@/services/hero.service';
+import { useRouter } from 'vue-router';
+
 const { topHeroes } = useHeroes();
+const router = useRouter();
 </script>
 
 <template>
   <div class="title">Top Heroes</div>
 
   <div class="top-heroes">
-    <div v-for="(hero, index) in topHeroes" :key="index" class="top-hero">
+    <div
+      v-for="(hero, index) in topHeroes"
+      :key="index"
+      class="top-hero"
+      @click="
+        router.push({
+          name: 'hero-details',
+          params: { id: hero.number }
+        })
+      "
+    >
       {{ hero.name }}
     </div>
   </div>
