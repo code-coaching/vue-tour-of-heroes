@@ -33,6 +33,14 @@ const uppercase = (text: string) => text.toUpperCase();
     </div>
   </div>
 
+  <StyledButton
+    class="new-hero-button"
+    :type="'primary'"
+    @click="router.push({ name: 'hero-add' })"
+  >
+    New
+  </StyledButton>
+
   <template v-if="selectedHero">
     <div class="title">{{ uppercase(selectedHero.name) }} is my hero</div>
     <div class="buttons">
@@ -99,5 +107,9 @@ const uppercase = (text: string) => text.toUpperCase();
 .buttons {
   display: flex;
   gap: 0.5rem;
+}
+
+.new-hero-button {
+  margin-top: 1rem;
 }
 </style>
