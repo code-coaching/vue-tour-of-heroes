@@ -32,7 +32,7 @@ onMounted(() => {
     <div class="title">{{ hero.name }} details!</div>
 
     <div>id: {{ hero.number }}</div>
-    <div>name: <input :value="hero.name" /></div>
+    <div>name: <input v-model="hero.name" /></div>
 
     <StyledButton class="back-button" @click="router.go(-1)">Back</StyledButton>
   </template>
