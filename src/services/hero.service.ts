@@ -1,7 +1,7 @@
 import type { Hero } from '@/components/models';
-import { computed, ref, type Ref } from 'vue';
+import { computed, ref, toRaw, type Ref } from 'vue';
 
-const heroes = [
+const heroes = ref([
   { number: 11, name: 'Mr. Nice' },
   { number: 12, name: 'Narco' },
   { number: 13, name: 'Bombasto' },
@@ -12,19 +12,33 @@ const heroes = [
   { number: 18, name: 'Dr IQ' },
   { number: 19, name: 'Magma' },
   { number: 20, name: 'Tornado' }
-];
+]);
 
 const selectedHero: Ref<null | Hero> = ref(null);
 
 const useHeroes = () => {
   const topHeroes = computed(() => {
-    return heroes.slice(-4);
+    return heroes.value.slice(-4);
   });
+
+  const findHero = (heroId: number) => {
+    const matchingHero = heroes.value.find((hero) => hero.number === heroId) ?? null;
+    return structuredClone(toRaw(matchingHero));
+  };
+
+  const updateHero = (hero: Hero) => {
+    const index = heroes.value.findIndex((h) => h.number === hero.number);
+    if (index !== -1) {
+      heroes.value[index] = structuredClone(toRaw(hero));
+    }
+  }
 
   return {
     heroes,
     selectedHero,
-    topHeroes
+    topHeroes,
+    findHero,
+    updateHero
   };
 };
 

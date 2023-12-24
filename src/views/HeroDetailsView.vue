@@ -8,12 +8,12 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
-const { heroes } = useHeroes();
+const { findHero, updateHero } = useHeroes();
 const hero: Ref<Hero | null> = ref(null);
 
 onMounted(() => {
   const heroId = Number(route.params.id);
-  hero.value = heroes.find((hero) => hero.number === heroId) ?? null;
+  hero.value = findHero(heroId);
 });
 </script>
 
@@ -24,7 +24,17 @@ onMounted(() => {
     <div>id: {{ hero.number }}</div>
     <div>name: <input v-model="hero.name" /></div>
 
-    <StyledButton class="back-button" @click="router.go(-1)">Back</StyledButton>
+    <div class="buttons">
+      <StyledButton @click="router.go(-1)">Back</StyledButton>
+      <StyledButton
+        @click="
+          updateHero(hero);
+          router.go(-1);
+        "
+      >
+        Save
+      </StyledButton>
+    </div>
   </template>
   <template v-else>
     <div class="title">Hero not found!</div>
@@ -37,7 +47,9 @@ onMounted(() => {
   margin-bottom: 1rem;
 }
 
-.back-button {
+.buttons {
   margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
 }
 </style>
