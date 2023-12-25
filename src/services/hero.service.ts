@@ -31,6 +31,7 @@ const useHeroes = () => {
     if (index !== -1) {
       heroes.value[index] = structuredClone(toRaw(hero));
     }
+    saveHeroes();
   };
 
   const deleteHero = (hero: Hero) => {
@@ -38,13 +39,26 @@ const useHeroes = () => {
     if (selectedHero.value?.number === hero.number) {
       selectedHero.value = null;
     }
+    saveHeroes();
   };
 
   const addHero = (name: string) => {
     const maxNumber = Math.max(...heroes.value.map((h) => h.number));
     const newHero = { number: maxNumber + 1, name } satisfies Hero;
     heroes.value.push(newHero);
+    saveHeroes();
   };
+
+  const saveHeroes = () => {
+    localStorage.setItem('heroes', JSON.stringify(heroes.value));
+  }
+
+  const loadHeroes = () => {
+    const savedHeroes = localStorage.getItem('heroes');
+    if (savedHeroes) {
+      heroes.value = JSON.parse(savedHeroes);
+    }
+  }
 
   return {
     heroes,
@@ -53,7 +67,8 @@ const useHeroes = () => {
     findHero,
     updateHero,
     deleteHero,
-    addHero
+    addHero,
+    loadHeroes
   };
 };
 
