@@ -27,6 +27,11 @@ const router = createRouter({
           path: 'heroes/:id',
           name: 'hero-details',
           component: () => import('@/views/HeroDetailsView.vue')
+        },
+        {
+          path: 'login',
+          name: 'login',
+          component: () => import('@/views/LoginView.vue')
         }
       ]
     }

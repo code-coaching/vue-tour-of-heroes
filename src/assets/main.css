@@ -1,6 +1,6 @@
 /* Application-wide Styles */
 body,
-input[type='text'],
+input,
 button {
   color: #333;
   font-family: Cambria, Georgia, serif;
