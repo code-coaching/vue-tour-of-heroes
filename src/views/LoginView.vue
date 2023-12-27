@@ -6,10 +6,17 @@ const { login } = useAuth();
 
 const email = ref('');
 const password = ref('');
+
+const authenticate = () => {
+  login(email.value, password.value).then(() => {
+    email.value = '';
+    password.value = '';
+  });
+}
 </script>
 
 <template>
   <input type="email" v-model="email" />
   <input type="password" v-model="password" />
-  <button @click="login(email, password)">Login</button>
+  <button @click="authenticate()">Login</button>
 </template>

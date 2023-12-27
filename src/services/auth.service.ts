@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const useAuth = () => {
   const login = (email: string, password: string) => {
-    axios
+    return axios
       .post<{ token: string }>('https://code-coaching.dev/api/token/login', {
         email,
         password
@@ -10,6 +10,7 @@ const useAuth = () => {
       .then((res) => {
         const token = res.data.token;
         localStorage.setItem('token', token);
+        return res;
       });
   };
 
