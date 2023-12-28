@@ -51,7 +51,13 @@ const useHeroes = () => {
         }
       })
       .then((res) => {
-        console.log(res);
+        heroes.value = res.data.map((heroBackend) => {
+          const hero = {
+            number: heroBackend.id,
+            name: heroBackend.name
+          } satisfies Hero;
+          return hero;
+        });
       });
   };
 

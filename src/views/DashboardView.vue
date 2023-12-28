@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { useHeroes } from '@/services/hero.service';
 import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
 
-const { topHeroes } = useHeroes();
+const { topHeroes, loadHeroes } = useHeroes();
 const router = useRouter();
+
+onMounted(() => {
+  loadHeroes()
+});
 </script>
 
 <template>

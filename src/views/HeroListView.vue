@@ -2,17 +2,22 @@
 import StyledButton from '@/components/StyledButton.vue';
 import type { Hero } from '@/components/models';
 import { useHeroes } from '@/services/hero.service';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-const { heroes, selectedHero, deleteHero } = useHeroes();
+const { heroes, selectedHero, deleteHero, loadHeroes } = useHeroes();
 
 const onClickHero = (hero: Hero) => {
   selectedHero.value = hero;
 };
 
 const uppercase = (text: string) => text.toUpperCase();
+
+onMounted(() => {
+  loadHeroes();
+});
 </script>
 
 <template>
