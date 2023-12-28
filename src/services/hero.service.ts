@@ -1,18 +1,8 @@
-import type { Hero } from '@/components/models';
+import type { Hero, HeroBackend } from '@/components/models';
+import axios from 'axios';
 import { computed, ref, toRaw, type Ref } from 'vue';
 
-const heroes = ref([
-  { number: 11, name: 'Mr. Nice' },
-  { number: 12, name: 'Narco' },
-  { number: 13, name: 'Bombasto' },
-  { number: 14, name: 'Celeritas' },
-  { number: 15, name: 'Magneta' },
-  { number: 16, name: 'RubberMan' },
-  { number: 17, name: 'Dynama' },
-  { number: 18, name: 'Dr IQ' },
-  { number: 19, name: 'Magma' },
-  { number: 20, name: 'Tornado' }
-]);
+const heroes: Ref<Array<Hero>> = ref([]);
 
 const selectedHero: Ref<null | Hero> = ref(null);
 
@@ -51,14 +41,19 @@ const useHeroes = () => {
 
   const saveHeroes = () => {
     localStorage.setItem('heroes', JSON.stringify(heroes.value));
-  }
+  };
 
   const loadHeroes = () => {
-    const savedHeroes = localStorage.getItem('heroes');
-    if (savedHeroes) {
-      heroes.value = JSON.parse(savedHeroes);
-    }
-  }
+    axios
+      .get<Array<HeroBackend>>('https://code-coaching.dev/api/heroes', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return {
     heroes,
