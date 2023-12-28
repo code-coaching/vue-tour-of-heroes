@@ -17,11 +17,21 @@ const useHeroes = () => {
   };
 
   const updateHero = (hero: Hero) => {
-    const index = heroes.value.findIndex((h) => h.number === hero.number);
-    if (index !== -1) {
-      heroes.value[index] = structuredClone(toRaw(hero));
-    }
-    saveHeroes();
+    return axios
+      .patch(
+        `https://code-coaching.dev/api/heroes/${hero.number}`,
+        {
+          name: hero.name
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+        }
+      )
+      .then(() => {
+        selectedHero.value = null;
+      });
   };
 
   const deleteHero = (hero: Hero) => {
@@ -46,10 +56,6 @@ const useHeroes = () => {
         }
       } // opties - hier voegen we de token toe aan de Authorization header
     );
-  };
-
-  const saveHeroes = () => {
-    localStorage.setItem('heroes', JSON.stringify(heroes.value));
   };
 
   const loadHeroes = () => {

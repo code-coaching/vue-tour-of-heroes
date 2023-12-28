@@ -22,6 +22,13 @@ const remove = () => {
     router.go(-1);
   });
 };
+
+const save = () => {
+  if (hero.value === null) return;
+  updateHero(hero.value).then(() => {
+    router.go(-1);
+  });
+};
 </script>
 
 <template>
@@ -33,15 +40,7 @@ const remove = () => {
 
     <div class="buttons">
       <StyledButton @click="router.go(-1)">Back</StyledButton>
-      <StyledButton
-        :type="'primary'"
-        @click="
-          updateHero(hero);
-          router.go(-1);
-        "
-      >
-        Save
-      </StyledButton>
+      <StyledButton :type="'primary'" @click="save()"> Save </StyledButton>
       <StyledButton :type="'negative'" @click="remove()"> Delete </StyledButton>
     </div>
   </template>
