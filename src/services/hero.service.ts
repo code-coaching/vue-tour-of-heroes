@@ -25,18 +25,27 @@ const useHeroes = () => {
   };
 
   const deleteHero = (hero: Hero) => {
-    heroes.value = heroes.value.filter((h) => h.number !== hero.number);
-    if (selectedHero.value?.number === hero.number) {
-      selectedHero.value = null;
-    }
-    saveHeroes();
+    return axios
+      .delete(`https://code-coaching.dev/api/heroes/${hero.number}`, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(() => {
+        selectedHero.value = null;
+      });
   };
 
   const addHero = (name: string) => {
-    const maxNumber = Math.max(...heroes.value.map((h) => h.number));
-    const newHero = { number: maxNumber + 1, name } satisfies Hero;
-    heroes.value.push(newHero);
-    saveHeroes();
+    return axios.post(
+      'https://code-coaching.dev/api/heroes', // end point
+      { name }, // body
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      } // opties - hier voegen we de token toe aan de Authorization header
+    );
   };
 
   const saveHeroes = () => {

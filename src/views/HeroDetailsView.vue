@@ -15,6 +15,13 @@ onMounted(() => {
   const heroId = Number(route.params.id);
   hero.value = findHero(heroId);
 });
+
+const remove = () => {
+  if (hero.value === null) return;
+  deleteHero(hero.value).then(() => {
+    router.go(-1);
+  });
+};
 </script>
 
 <template>
@@ -35,15 +42,7 @@ onMounted(() => {
       >
         Save
       </StyledButton>
-      <StyledButton
-        :type="'negative'"
-        @click="
-          deleteHero(hero);
-          router.go(-1);
-        "
-      >
-        Delete
-      </StyledButton>
+      <StyledButton :type="'negative'" @click="remove()"> Delete </StyledButton>
     </div>
   </template>
   <template v-else>

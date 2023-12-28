@@ -8,6 +8,12 @@ const router = useRouter();
 const { addHero } = useHeroes();
 
 const name = ref('');
+
+const saveHero = () => {
+  addHero(name.value).then(() => {
+    router.go(-1);
+  });
+};
 </script>
 
 <template>
@@ -17,15 +23,7 @@ const name = ref('');
 
   <div class="buttons">
     <StyledButton @click="router.go(-1)">Back</StyledButton>
-    <StyledButton
-      :type="'primary'"
-      @click="
-        addHero(name);
-        router.go(-1);
-      "
-    >
-      Save
-    </StyledButton>
+    <StyledButton :type="'primary'" @click="saveHero()"> Save </StyledButton>
   </div>
 </template>
 

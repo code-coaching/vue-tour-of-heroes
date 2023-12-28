@@ -18,6 +18,13 @@ const uppercase = (text: string) => text.toUpperCase();
 onMounted(() => {
   loadHeroes();
 });
+
+const remove = () => {
+  if (selectedHero.value === null) return;
+  deleteHero(selectedHero.value).then(() => {
+    loadHeroes();
+  });
+};
 </script>
 
 <template>
@@ -54,7 +61,7 @@ onMounted(() => {
       >
         Details
       </StyledButton>
-      <StyledButton :type="'negative'" @click="deleteHero(selectedHero)">Delete</StyledButton>
+      <StyledButton :type="'negative'" @click="remove()">Delete</StyledButton>
     </div>
   </template>
 </template>
