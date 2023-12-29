@@ -1,12 +1,14 @@
-import axios from 'axios';
 import { ref } from 'vue';
+import { useApi } from './api.service';
+
+const { api } = useApi();
 
 const isAuthenticated = ref(localStorage.getItem('token') !== null);
 
 const useAuth = () => {
   const login = (email: string, password: string) => {
-    return axios
-      .post<{ token: string }>('https://code-coaching.dev/api/token/login', {
+    return api
+      .post<{ token: string }>('/token/login', {
         email,
         password
       })

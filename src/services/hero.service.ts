@@ -1,6 +1,8 @@
 import type { Hero, HeroBackend } from '@/components/models';
-import axios from 'axios';
 import { computed, ref, type Ref } from 'vue';
+import { useApi } from './api.service';
+
+const { api } = useApi();
 
 const heroes: Ref<Array<Hero>> = ref([]);
 
@@ -12,32 +14,29 @@ const useHeroes = () => {
   });
 
   const findHero = (heroId: number) => {
-    return axios
-      .get<HeroBackend>(`https://code-coaching.dev/api/heroes/${heroId}`, {
+    return api
+      .get<HeroBackend>(`/heroes/${heroId}`, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }
       })
       .then(
-        // we onderscheppen de data die terugkomt van de API via .then()
         (res) => {
           const heroBackend = res.data;
           const hero = {
             number: heroBackend.id,
             name: heroBackend.name
           } satisfies Hero;
-          // de data wordt omgevormd van een HeroBackend object naar een Hero object
-          // vanaf dit punt bevat de Promise een Hero object
-          // als we later .then() doen, dan krijgen we een Hero object
+    
           return hero;
         }
       );
   };
 
   const updateHero = (hero: Hero) => {
-    return axios
+    return api
       .patch(
-        `https://code-coaching.dev/api/heroes/${hero.number}`,
+        `/heroes/${hero.number}`,
         {
           name: hero.name
         },
@@ -53,8 +52,8 @@ const useHeroes = () => {
   };
 
   const deleteHero = (hero: Hero) => {
-    return axios
-      .delete(`https://code-coaching.dev/api/heroes/${hero.number}`, {
+    return api
+      .delete(`/heroes/${hero.number}`, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -65,20 +64,20 @@ const useHeroes = () => {
   };
 
   const addHero = (name: string) => {
-    return axios.post(
-      'https://code-coaching.dev/api/heroes', // end point
-      { name }, // body
+    return api.post(
+      '/heroes',
+      { name }, 
       {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }
-      } // opties - hier voegen we de token toe aan de Authorization header
+      } 
     );
   };
 
   const loadHeroes = () => {
-    axios
-      .get<Array<HeroBackend>>('https://code-coaching.dev/api/heroes', {
+    api
+      .get<Array<HeroBackend>>('/heroes', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
