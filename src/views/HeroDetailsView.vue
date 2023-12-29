@@ -11,9 +11,13 @@ const router = useRouter();
 const { findHero, updateHero, deleteHero } = useHeroes();
 const hero: Ref<Hero | null> = ref(null);
 
-onMounted(() => {
+onMounted(async () => {
   const heroId = Number(route.params.id);
-  hero.value = findHero(heroId);
+  try {
+    hero.value = await findHero(heroId);
+  } catch (e) {
+    hero.value = null;
+  }
 });
 
 const remove = () => {

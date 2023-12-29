@@ -1,6 +1,6 @@
 import type { Hero, HeroBackend } from '@/components/models';
 import axios from 'axios';
-import { computed, ref, toRaw, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 
 const heroes: Ref<Array<Hero>> = ref([]);
 
@@ -12,8 +12,26 @@ const useHeroes = () => {
   });
 
   const findHero = (heroId: number) => {
-    const matchingHero = heroes.value.find((hero) => hero.number === heroId) ?? null;
-    return structuredClone(toRaw(matchingHero));
+    return axios
+      .get<HeroBackend>(`https://code-coaching.dev/api/heroes/${heroId}`, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(
+        // we onderscheppen de data die terugkomt van de API via .then()
+        (res) => {
+          const heroBackend = res.data;
+          const hero = {
+            number: heroBackend.id,
+            name: heroBackend.name
+          } satisfies Hero;
+          // de data wordt omgevormd van een HeroBackend object naar een Hero object
+          // vanaf dit punt bevat de Promise een Hero object
+          // als we later .then() doen, dan krijgen we een Hero object
+          return hero;
+        }
+      );
   };
 
   const updateHero = (hero: Hero) => {
